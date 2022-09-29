@@ -1,5 +1,6 @@
 # course-project-group-82
 course-project-group-82 created by GitHub Classroom
+
 Authors: Alexis Serrano, Sankar Gopalkrishna, Praneeth Rangamudri, Huiyao Liang
 
 Overview:
