@@ -19,7 +19,7 @@ import websockets
 import asyncio
 import base64
 import json
-from configure import auth_key
+##from configure import auth_key
 
 URL = "wss://api.assemblyai.com/v2/realtime/ws?sample_rate=16000"
  
@@ -27,7 +27,7 @@ async def send_receive():
    print(f'Connecting websocket to url ${URL}')
    async with websockets.connect(
        URL,
-       extra_headers=(("Authorization", auth_key),),
+       extra_headers=(("Authorization", "93587f8e61c94b888bffb73e1f63dc9e"),),
        ping_interval=5,
        ping_timeout=20
    ) as _ws:
@@ -66,3 +66,6 @@ async def send_receive():
                    assert False, "Not a websocket 4008 error"
       
        send_result, receive_result = await asyncio.gather(send(), receive())
+
+while True:
+        asyncio.run(send_receive())
