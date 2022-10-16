@@ -1,10 +1,12 @@
 
 import unittest   # The test framework
+import sys
+sys.path.insert(1, "G:\UIUC\cs\cs222\course-project-group-82\Source")
 import Source.Speech_to_text as s
 import filecmp
-f1 = "G:\UIUC\cs\cs222\course-project-group-82\.github\Speech_Test\quick_speaker.txt"
-f2 = "G:\UIUC\cs\cs222\course-project-group-82\.github\Speech_Test\slow_speaker.txt"
-f3 = "G:\UIUC\cs\cs222\course-project-group-82\output.txt"
+f1 = "Speech_Test\quick_speaker.txt"
+f2 = "Speech_Test\slow_speaker.txt"
+f3 = "output.txt"
 class Test_TestIncrementDecrement(unittest.TestCase):
     def test_slow_speak(self):
         s.speech_to_text()
