@@ -7,12 +7,13 @@ from Speech_to_text import speech_to_text as s
 import filecmp
 f1 = "Speech_Test/Continuous.txt"
 f2 = "output.txt"
+f3 = "Nothing.txt"
 class Test_TestIncrementDecrement(unittest.TestCase):
     def test_speak_nothing3s(self):
         try:
             s.speech_to_text()
         except speech_recognition.WaitTimeoutError:
-            result = filecmp(f1, f2, shallow = False)
+            result = filecmp(f3, f2, shallow = False)
             self.assertEqual(0, result)
 
     def test_Interminent_2s(self):
