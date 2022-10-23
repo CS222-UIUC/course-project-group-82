@@ -10,4 +10,10 @@ Instructions:
     Install Libraries:
         pip install speechrecognition
         pip install pyaudio
+        pip install googletrans
     While program is listening to microphone it will print out in quotations, 'listening'. This tells the user to begin speaking to the microphone. As the speaking occurs, the program will display the text for the words being spoken on the screen. In addition, there will afterwards be an option to translate this result into different languages. If the environment is too loud to hear properly, or the words were unintelligible, the program will display on screen, 'Oh no!. Try again.'.
+
+Troubleshooting Instructions:  
+    If the install of googletrans causes a path issue, then do this:
+        pip3 uninstall google trans
+        pip3 install googletrans=3.1.0a0
