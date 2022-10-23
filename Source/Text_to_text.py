@@ -6,9 +6,10 @@
 # print(result)
 
 from googletrans import Translator
-translator = Translator(service_urls=['translate.google.com','translate.google.co.kr',])
+translator = Translator()
+text1  = "はじめまして"
 
-translator.translate('안녕하세요.')
+print(translator.translate(text1, src = 'ja', dest = 'en'))
 
 # def translate_text(target, text):
 #     # """Translates text into the target language.
