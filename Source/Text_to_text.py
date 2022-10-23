@@ -4,11 +4,25 @@
 
 # result = translator.translate('Mikä on nimesi', src='fi', dest='fr')
 # print(result)
-
 from googletrans import Translator
-translator = Translator(service_urls=['translate.google.com','translate.google.co.kr',])
+translator = Translator()
+text1  = "はじめまして"
+translated1 = translator.translate(text1, src = 'ja', dest = 'en')
 
-translator.translate('안녕하세요.')
+print(translated1)
+
+file = open("Pretranslation.txt", "w")
+file.write(text1)
+file.close()
+
+file = open("Prosttranslation.txt", "w")
+file.write(translated1)
+file.close()
+
+
+#let's read the contents of the file now
+file = open("geeksforgeeks.txt","r")
+print(file.read())
 
 # def translate_text(target, text):
 #     # """Translates text into the target language.
