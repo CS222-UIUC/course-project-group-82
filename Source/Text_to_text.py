@@ -11,6 +11,24 @@ text1  = "はじめまして"
 
 print(translator.translate(text1, src = 'ja', dest = 'en'))
 
+#Result of fiddling with file creation
+translated1 = translator.translate(text1, src = 'ja', dest = 'en')
+
+print(translated1)
+
+file = open("Pretranslation.txt", "w")
+file.write(text1)
+file.close()
+
+file = open("Prosttranslation.txt", "w")
+file.write(translated1)
+file.close()
+
+
+#let's read the contents of the file now
+file = open("geeksforgeeks.txt","r")
+print(file.read())
+
 # def translate_text(target, text):
 #     # """Translates text into the target language.
 
