@@ -5,30 +5,33 @@
 # result = translator.translate('Mikä on nimesi', src='fi', dest='fr')
 # print(result)
 
-from csv import reader
-from googletrans import Translator
+# from googletrans import Translator
+
+# translator = Translator()
+
+# result = translator.translate('Mikä on nimesi', src='fi', dest='fr')
+# print(result)
+
+from googletrans import Translator                                      
 translator = Translator()
 text1  = "はじめまして"
+translated1 = translator.translate(text1, src = 'ja', dest = 'en')  # Creates translation object translating from src to dest
 
-print(translator.translate(text1, src = 'ja', dest = 'en'))
+print(translated1.text)
 
-#Result of fiddling with file creation
-translated1 = translator.translate(text1, src = 'ja', dest = 'en')
-
-print(translated1)
-
-file = open("Pretranslation.txt", "w")
-file.write(text1)
-file.close()
-
-file = open("Prosttranslation.txt", "w")
-file.write(translated1)
-file.close()
+file = open("Pretranslation.txt", "w", encoding = "utf-16")         # Opens file with name, uses write command, encodes to utf-16   
+file.write(text1)                                                   # Writes the original string into file
+file.close()                                                        # Closes file
+result = translator.translate('Mikä on nimesi', src='fi', dest='fr')
+print(result.text)
+file = open("Posttranslation.txt", "w", encoding = "utf-16")        # Opens file with name, , uses write command, encodes to utf-16 
+file.write(translated1.text)                                        # Write text from translated object
+file.close()                                                        # Closes file
 
 
-#let's read the contents of the file now
-file = open("geeksforgeeks.txt","r")
-print(file.read())
+# #let's read the contents of the file now
+file = open("Posttranslation.txt","r", encoding = "utf-16")         # Opens translated file for reading
+print(file.read())                                                  # Prints the text in the written file
 
 # def translate_text(target, text):
 #     # """Translates text into the target language.
