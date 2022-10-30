@@ -38,8 +38,3 @@ def generate_access_token(app_id, scopes):
         _f.write(access_token_cache.serialize())
 
     return token_response
-
-if __name__ == '__main__':
-    ...
-
-
