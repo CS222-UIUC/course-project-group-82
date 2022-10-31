@@ -1,16 +1,4 @@
-# from googletrans import Translator
 
-# translator = Translator()
-
-# result = translator.translate('Mikä on nimesi', src='fi', dest='fr')
-# print(result)
-
-# from googletrans import Translator
-
-# translator = Translator()
-
-# result = translator.translate('Mikä on nimesi', src='fi', dest='fr')
-# print(result)
 
 from googletrans import Translator   
 class TxtToTxt:
@@ -29,3 +17,18 @@ class TxtToTxt:
         file = open(fileTo,"r", encoding = "utf-16")         # Opens translated file for reading
         print(file.read())                                                  # Prints the text in the written file
         file.close()    
+=======
+#     print(u"Text: {}".format(result["input"]))
+#     print(u"Translation: {}".format(result["translatedText"]))
+#     print(u"Detected source language: {}".format(result["detectedSourceLanguage"]))
+
+
+# Print a basic CSV File
+with open('Example.csv', 'r') as read_obj:
+   # pass the file object to reader() to get the reader object
+   csv_reader = reader(read_obj)
+   # Iterate over each row in the csv using reader object
+   for row in csv_reader:
+       # row variable is a list that represents a row in csv
+       print(row)
+
