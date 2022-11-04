@@ -17,3 +17,10 @@ Troubleshooting Instructions:
     If the install of googletrans causes a path issue, then do this:
         pip3 uninstall google trans
         pip3 install googletrans=3.1.0a0
+        
+ Demo of Live transcripting
+    
+
+
+https://user-images.githubusercontent.com/90361843/200074795-271e1dab-0bbd-44b5-81dd-0467cad71e0a.mp4
+
