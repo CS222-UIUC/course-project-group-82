@@ -1,16 +1,17 @@
 from csv import reader
 from googletrans import Translator  
-from Text_to_text import *
+from Text_to_text import TxtToTxt
 
 #Test 1 (Check if one letter word text is fine)
 def test_single_words():                              
     translator = Translator()
     translated_text_one = translator.translate("Hello", src = translator.detect("Hello").lang, dest = "es")
     assert(translated_text_one.text == "Hola")
-    translated_text_two = translator.translate("Bonjour", src = translator.detect("Bonjour").lang, dest = "en")
+    translated_text_two = translator.translate("Hola", src = translator.detect("Hola").lang, dest = "en")
+    # assert(translated_text_two.text == "Bonjour")
     # detects 'Bonjour' as English
-    print(translator.detect("Bonjour"))
-    # assert(translated_text_two.text == "Hello")
+    print(translator.detect("Hola")) #Ask about this in meeting
+    #assert(translated_text_two.text == "Hello")
 
 def test_multiple_words():                              
     translator = Translator()
@@ -32,10 +33,22 @@ def test_several_sentences(): #Also tests punctuation marks
     to_translate_three = "Ich bin jetzt sehr hungrig. Wo möchtest du essen? Wie weit ist es von hier?"
     translated_text_three = translator.translate(to_translate_three, src =  translator.detect(to_translate_three).lang, dest = "zh-cn")
     # I checked, the text looks the exact same to me. Unsure of the case, assume it is because we compare string exactly.
-    assert(translated_text_three == "我现在很饿。你想去哪里吃饭？离这有多远？")
+    assert(translated_text_three.text == "我现在很饿。你想去哪里吃饭？离这有多远？")
     
+def translateText(): # Checks text to file
+    txtTranslator = TxtToTxt()
+    file = open("fileTo.txt", "w", encoding = "utf-16")        # Opens file with name, , uses write command, encodes to utf-16 
+    file.write("")                                        # Write text from translated object
+    file.close() 
+    file = open("fileSecond.txt", "w", encoding = "utf-16")        # Opens file with name, , uses write command, encodes to utf-16 
+    file.write("")                                        # Write text from translated object
+    file.close() 
+    to_translate = "I am feeling very tired today. How are you doing? What are you up to? What a Surprise!"
+    txtTranslator.translateText(to_translate, "fileTo.txt", "Spanish") #Text-To-File Test
     
+    txtTranslator.translateFile("test.txt", "fileSecond.txt", "Spanish") #File-To-File Test
 
 test_single_words()
 test_multiple_words()
 test_several_sentences()
+translateText()
