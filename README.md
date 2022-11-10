@@ -22,5 +22,4 @@ Troubleshooting Instructions:
     
 
 
-https://user-images.githubusercontent.com/90361843/200074795-271e1dab-0bbd-44b5-81dd-0467cad71e0a.mp4
 
