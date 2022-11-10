@@ -7,10 +7,10 @@ class speech_to_text ():
     r = sr.Recognizer()
     with sr.Microphone() as source, open('output.txt','w') as f:
         print("Listening...")
-        r.energy_threshold = 10000 
-        r.pause_threshold = 2;                                              # In order to allow                                      
+        r.adjust_for_ambient_noise(source, duration = 0.4)                  # Wait for 0.4 seconds to recognize the background noise
+        r.pause_threshold = 2;                                              # It allows pauses 2 seconds during each phrases                                      
         while 1:
-            audio = r.listen(source, timeout= 3)                            # Allow Intermittent for 5 seconds with silence.Or it will terminate.
+            audio = r.listen(source, timeout= 3)                            # Allow Intermittent for 3 seconds with silence.Or it will terminate.
             ##
             try: 
                 text = r.recognize_google(audio) 
