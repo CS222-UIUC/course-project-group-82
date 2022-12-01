@@ -45,8 +45,14 @@ def translateText(): # Checks text to file
     file.close() 
     to_translate = "I am feeling very tired today. How are you doing? What are you up to? What a Surprise!"
     txtTranslator.translateText(to_translate, "fileTo.txt", "Spanish") #Text-To-File Test
-    
+    to_translate = "bonjour"
+    txtTranslator.translateText(to_translate, "fileTo2.txt", "English") #Text-To-File Test
+    to_translate = "freiheit"
+    txtTranslator.translateText(to_translate, "fileTo3.txt", "English") #Text-To-File Test
+    to_translate = "bueno"
+    txtTranslator.translateText(to_translate, "fileTo4.txt", "English") #Text-To-File Test
     txtTranslator.translateFile("test.txt", "fileSecond.txt", "Spanish") #File-To-File Test
+    txtTranslator.translateFile("DeBelloGallico.txt", "TheGallicWar.text", "English")
 
 test_single_words()
 test_multiple_words()
