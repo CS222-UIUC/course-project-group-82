@@ -87,28 +87,3 @@ def from_file():
     speech_recognizer.start_continuous_recognition()
     while not done:
         time.sleep(.5)
-
-
-# # Creates an instance of a speech config with specified subscription key and service region.
-# # Replace with your own subscription key and service region (e.g., "westus").
-# speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
-# # Creates a recognizer with the given settings
-# speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
-# timestr = time.strftime("%Y%m%d-%H%M%S")
-# print (timestr)
-# filepath = r"output.txt"+timestr+".txt"
-# print (filepath)
-# f = open(filepath, 'a', buffering=1)
-# appHeight = 150
-# padding = 20
-# labelText = NONE
-
-# def recognizing(args):
-#     global labelText
-#     labelText.set(args.result.text)
-
-# def recognized(args):
-#     global f
-#     if args.result.text.strip() != '':
-#         print(args.result.text + "\n")
-#         f.write(args.result.text + "\n")
