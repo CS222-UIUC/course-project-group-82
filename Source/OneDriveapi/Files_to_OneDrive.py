@@ -1,6 +1,6 @@
 import os
 import requests
-from OneDriveAccess import generate_access_token, GRAPH_API_ENDPOINT
+from OneDriveapi.OneDriveAccess import generate_access_token, GRAPH_API_ENDPOINT
 
 
 
@@ -27,4 +27,4 @@ def uploadToOneDrive(path):
 
 
 
-uploadToOneDrive('/Users/alexisserrano/Documents/CS222_82/course-project-group-82/Source/Speech_Test/Continuous.txt')
+#uploadToOneDrive('/Users/alexisserrano/Documents/CS222_82/course-project-group-82/Source/Speech_Test/Continuous.txt')
