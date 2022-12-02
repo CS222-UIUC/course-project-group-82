@@ -5,11 +5,12 @@ import azure.cognitiveservices.speech as speechsdk
 from tkinter import *
 import tkinter as tk
 import sys
-from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
+from time import sleep
+import textwrap 
 
 def realtime():
+    # speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
     speech_config = speechsdk.SpeechConfig(subscription="fc419cfd9f294afca49dc99a8aa7300a", region="centralus")
-    #speech_config = speechsdk.SpeechConfig(subscription=os.environ.get(''), region=os.environ.get('SPEECH_REGION'))
     # Creates a recognizer with the given settings
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
     timestr = time.strftime("%Y%m%d-%H%M%S")
@@ -22,12 +23,14 @@ def realtime():
     labelText = NONE
     print("The speech lasts for (seconds):" )
     recognizingTime = input()
-    speech_config = speechsdk.SpeechConfig(subscription="fc419cfd9f294afca49dc99a8aa7300a", region="centralus")
-    #speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
+
     speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
+    speech_recognizer.recognizing.connect(lambda evt: print(textwrap.fill(format(evt.result.text), width = 180),end='\r', flush=True,))
+    # speech_recognizer.recognizing.connect(lambda evt:sys.stdout.write("\r{}".format(evt.result.text)))
+    # sys.stdout.flush()
+    # sleep(1)
+    # speech_recognizer.recognized.connect(lambda evt: f.write('\n{}'.format(evt.result.text)))
     speech_recognizer.session_stopped.connect(lambda evt: print('\nSESSION STOPPED {}'.format(evt)))
-    speech_recognizer.recognizing.connect(lambda evt: print('\n{}'.format(evt.result.text)))
-    speech_recognizer.recognizing.connect(lambda evt: f.write('\n{}'.format(evt.result.text)))
     speech_recognizer.start_continuous_recognition()
 
     #Let the program lasts for the amount of time entered in seconds. This time range can be changed to when the user wanna stop use this program
