@@ -8,44 +8,22 @@ import sys
 from time import sleep
 import textwrap 
 
-# # Creates an instance of a speech config with specified subscription key and service region.
-# # Replace with your own subscription key and service region (e.g., "westus").
-# speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
-# # Creates a recognizer with the given settings
-# speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
-# timestr = time.strftime("%Y%m%d-%H%M%S")
-# print (timestr)
-# filepath = r"output.txt"+timestr+".txt"
-# print (filepath)
-# f = open(filepath, 'a', buffering=1)
-# appHeight = 150
-# padding = 20
-# labelText = NONE
-
-# def recognizing(args):
-#     global labelText
-#     labelText.set(args.result.text)
-
-# def recognized(args):
-#     global f
-#     if args.result.text.strip() != '':
-#         print(args.result.text + "\n")
-#         f.write(args.result.text + "\n")
 def realtime():
-    speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
+    # speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
+    speech_config = speechsdk.SpeechConfig(subscription="fc419cfd9f294afca49dc99a8aa7300a", region="centralus")
     # Creates a recognizer with the given settings
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
-    # timestr = time.strftime("%Y%m%d-%H%M%S")
-    # print (timestr)
-    # filepath = r"output.txt"+timestr+".txt"
-    # print (filepath)
-    # f = open(filepath, 'a', buffering=1)
-    # appHeight = 150
-    # padding = 20
-    # labelText = NONE
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    print (timestr)
+    filepath = r"output.txt"+timestr+".txt"
+    print (filepath)
+    f = open(filepath, 'a', buffering=1)
+    appHeight = 150
+    padding = 20
+    labelText = NONE
     print("The speech lasts for (seconds):" )
     recognizingTime = input()
-    speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
+
     speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
     speech_recognizer.recognizing.connect(lambda evt: print(textwrap.fill(format(evt.result.text), width = 180),end='\r', flush=True,))
     # speech_recognizer.recognizing.connect(lambda evt:sys.stdout.write("\r{}".format(evt.result.text)))
@@ -110,3 +88,27 @@ def from_file():
     while not done:
         time.sleep(.5)
 
+
+# # Creates an instance of a speech config with specified subscription key and service region.
+# # Replace with your own subscription key and service region (e.g., "westus").
+# speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
+# # Creates a recognizer with the given settings
+# speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
+# timestr = time.strftime("%Y%m%d-%H%M%S")
+# print (timestr)
+# filepath = r"output.txt"+timestr+".txt"
+# print (filepath)
+# f = open(filepath, 'a', buffering=1)
+# appHeight = 150
+# padding = 20
+# labelText = NONE
+
+# def recognizing(args):
+#     global labelText
+#     labelText.set(args.result.text)
+
+# def recognized(args):
+#     global f
+#     if args.result.text.strip() != '':
+#         print(args.result.text + "\n")
+#         f.write(args.result.text + "\n")
