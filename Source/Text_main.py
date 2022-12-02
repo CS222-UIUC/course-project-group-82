@@ -7,9 +7,12 @@ import Text_to_text
 from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
 import PyPDF2
 import os
+from os.path import exists
+
 
 def inputToText():
-    os.remove("../OutputFiles/TranslatedText.txt")
+    if (exists("../OutputFiles/TranslatedText.txt")):
+        os.remove("../OutputFiles/TranslatedText.txt")
     t = Text_to_text.TxtToTxt()
     print("")
     text = input("Enter your text in: ") #Can the user type in spaces, try to see if it works
@@ -34,7 +37,8 @@ def inputToText():
             print("Successfully uploaded file!")
 
 def fileToText():
-    os.remove("../OutputFiles/TranslatedFile.txt")
+    if (exists("../OutputFiles/TranslatedFile.txt")):
+        os.remove("../OutputFiles/TranslatedFile.txt")
     t = Text_to_text.TxtToTxt()
     file_to_trans = input("Type in the name of the file that you want to be translated: ")
     print("")
@@ -52,16 +56,3 @@ def fileToText():
         if (response == "y"):
             uploadToOneDrive("../OutputFiles/TranslatedFile.txt")
             print("Successfully uploaded file!")
-
-    # else:  #Should we also give the option to the user for them to parse in pdf file? (useful if they have a certain document)
-    #     #Note the pdf needs to be within the same folder
-    #     pdf_ = input("Type in the name of pdf. Remeber to enter .pdf at end of file name: ") #Need to ensure valid pdf is entered
-    #     pdfFileObj = open(pdf_, 'rb')
-    #     pdfReader = PyPDF2.PdfFILErEADER(pdfFileObj)
-    #     for i in range(pdfReader.numPages):
-    #         pageObj = pdfReader.egtPage(i)
-    #         print(pageObj.extractText())
-    #     pdfFileObj.close()
- 
-    #Or instead should we convert pdf to text file and use existing features?
-    #Also should we provide the ability for text to be converted into a pdf file that the user can utilize?
