@@ -1,6 +1,8 @@
 import os
 import requests
-from OneDriveAccess import generate_access_token, GRAPH_API_ENDPOINT
+from OneDriveapi.OneDriveAccess import generate_access_token, GRAPH_API_ENDPOINT
+
+
 
 def uploadToOneDrive(path):
     APP_ID = '9a0921a7-905e-481a-ab14-a1a75f4d2a8f'
@@ -25,3 +27,4 @@ def uploadToOneDrive(path):
 
 
 
+#uploadToOneDrive('/Users/alexisserrano/Documents/CS222_82/course-project-group-82/Source/Speech_Test/Continuous.txt')
