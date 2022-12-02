@@ -1,0 +1,3 @@
+curl --request GET \
+  --url https://api.assemblyai.com/v2/ \
+  --header 'authorization: 93587f8e61c94b888bffb73e1f63dc9e'
