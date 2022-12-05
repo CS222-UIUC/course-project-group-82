@@ -7,30 +7,38 @@ import tkinter as tk
 import sys
 from time import sleep
 import textwrap 
+from os.path import exists
+from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
+
 
 def realtime():
+    if (exists("../OutputFiles/TranslatedSpeech.txt")):
+        os.remove("../OutputFiles/TranslatedSpeech.txt")
     # speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
     speech_config = speechsdk.SpeechConfig(subscription="fc419cfd9f294afca49dc99a8aa7300a", region="centralus")
     # Creates a recognizer with the given settings
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
     timestr = time.strftime("%Y%m%d-%H%M%S")
     print (timestr)
-    filepath = r"output.txt"+timestr+".txt"
-    print (filepath)
-    f = open(filepath, 'a', buffering=1)
+    #filepath = r"output.txt"+timestr+".txt"
+    #print (filepath)
+    #f = open(filepath, 'a', buffering=1)
+    f = open("../OutputFiles/TranslatedSpeech.txt", 'w', buffering=1)    
     appHeight = 150
     padding = 20
     labelText = NONE
     print("The speech lasts for (seconds):" )
     recognizingTime = input()
+    print("")
 
-    speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
-    speech_recognizer.recognizing.connect(lambda evt: print(textwrap.fill(format(evt.result.text), width = 180),end='\r', flush=True,))
+    speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED')) # {}'.format(evt)))
+    #print(end='\x1b[2k')
+    speech_recognizer.recognizing.connect(lambda evt: print(textwrap.fill(format(evt.result.text) + "  ", width = 180),end='\r', flush=True))
     # speech_recognizer.recognizing.connect(lambda evt:sys.stdout.write("\r{}".format(evt.result.text)))
     # sys.stdout.flush()
     # sleep(1)
-    # speech_recognizer.recognized.connect(lambda evt: f.write('\n{}'.format(evt.result.text)))
-    speech_recognizer.session_stopped.connect(lambda evt: print('\nSESSION STOPPED {}'.format(evt)))
+    speech_recognizer.recognized.connect(lambda evt: f.write('\n{}'.format(evt.result.text)))
+    speech_recognizer.session_stopped.connect(lambda evt: print('\nSESSION ENDED')) #.format(evt)))
     speech_recognizer.start_continuous_recognition()
 
     #Let the program lasts for the amount of time entered in seconds. This time range can be changed to when the user wanna stop use this program
@@ -43,28 +51,31 @@ def realtime():
  
 
 def from_file():
-    speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
-    
+    if (exists("../OutputFiles/TranslatedAudio.txt")):
+        os.remove("../OutputFiles/TranslatedAudio.txt")
+    #speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
+    speech_config = speechsdk.SpeechConfig(subscription="fc419cfd9f294afca49dc99a8aa7300a", region="centralus")
+
     # Creates a recognizer with the given settings
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config)
     timestr = time.strftime("%Y%m%d-%H%M%S")
     print (timestr)
-    filepath = r"output.txt"+timestr+".txt"
-    print (filepath)
-    f = open(filepath, 'a', buffering=1)
+    #filepath = r"../OutputFiles/TranslatedAudio.txt"+timestr+".txt"
+    #print (filepath)
+    f = open("../OutputFiles/TranslatedAudio.txt", 'w', buffering=1)
     appHeight = 150
     padding = 20
     labelText = NONE
     print("Enter the filepath with file type name: ")
     inputFile = input()
-    audio_input = speechsdk.AudioConfig(filename= inputFile)
+    audio_input = speechsdk.AudioConfig(filename= "../Source/" + inputFile)
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_input)
 
     done = False
 
     def stop_cb(evt):
         """callback that stops continuous recognition upon receiving an event `evt`"""
-        print('CLOSING on {}'.format(evt))
+        ##print('CLOSING on {}'.format(evt))
         speech_recognizer.stop_continuous_recognition()
         nonlocal done
         done = True
@@ -75,10 +86,10 @@ def from_file():
 
     speech_recognizer.recognized.connect(handle_final_result)
     # Connect callbacks to the events fired by the speech recognizer
-    speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
+    speech_recognizer.session_started.connect(lambda evt: print('CONVERSION STARTED')) #: {}'.format(evt)))
     speech_recognizer.recognized.connect(lambda evt: f.write('\n{}'.format(evt.result.text)))
-    speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
-    speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
+    speech_recognizer.session_stopped.connect(lambda evt: print('CONVERSION ENDED')) # {}'.format(evt)))
+    speech_recognizer.canceled.connect(lambda evt: print("")) #print('CANCELED {}'.format(evt)))
     # stop continuous recognition on either session stopped or canceled events
     speech_recognizer.session_stopped.connect(stop_cb)
     speech_recognizer.canceled.connect(stop_cb)
@@ -87,3 +98,16 @@ def from_file():
     speech_recognizer.start_continuous_recognition()
     while not done:
         time.sleep(.5)
+
+    print("File was successfully converted!\n")
+    input_upload = input("Do you want to save this file to OneDrive? y - Yes, n - No ")
+    print("")
+    if (input_upload == "y"):
+        print("You will be redirected to sign in to Microsoft OneDrive.\n" + 
+        "Type the generated code and follow the instructions.\n" + "This is a one-time procedure.\n" + 
+        "If you already signed in to OneDrive. Type y.\n")
+        response = input("Proceed?\n y - Yes, n - No: ")
+        print("")
+        if (response == "y"):
+            uploadToOneDrive("../OutputFiles/TranslatedAudio.txt")
+            print("Successfully uploaded file!")

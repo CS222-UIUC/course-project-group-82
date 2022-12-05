@@ -3,7 +3,7 @@ from fnmatch import translate
 from googletrans import Translator
 #from TextTest.OneLetter import translateText
 #from Text_to_text import translateText, translateFile
-import Text_to_text
+import Text_To_Text
 from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
 import PyPDF2
 import os
@@ -13,7 +13,7 @@ from os.path import exists
 def inputToText():
     if (exists("../OutputFiles/TranslatedText.txt")):
         os.remove("../OutputFiles/TranslatedText.txt")
-    t = Text_to_text.TxtToTxt()
+    t = Text_To_Text.TxtToTxt()
     print("")
     text = input("Enter your text in: ") #Can the user type in spaces, try to see if it works
     print("")
@@ -39,7 +39,7 @@ def inputToText():
 def fileToText():
     if (exists("../OutputFiles/TranslatedFile.txt")):
         os.remove("../OutputFiles/TranslatedFile.txt")
-    t = Text_to_text.TxtToTxt()
+    t = Text_To_Text.TxtToTxt()
     file_to_trans = input("Type in the name of the file that you want to be translated: ")
     print("")
     language_to_trans = input("Enter in the language that you want the text to be translated to: ")

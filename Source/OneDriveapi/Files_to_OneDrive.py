@@ -2,8 +2,6 @@ import os
 import requests
 from OneDriveapi.OneDriveAccess import generate_access_token, GRAPH_API_ENDPOINT
 
-
-
 def uploadToOneDrive(path):
     APP_ID = '9a0921a7-905e-481a-ab14-a1a75f4d2a8f'
     SCOPES = ['Files.ReadWrite']
