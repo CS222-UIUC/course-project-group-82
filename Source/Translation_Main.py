@@ -1,4 +1,4 @@
-import New_Speech_to_Text as s
+import Speech_To_Text as s
 import Text_main as t
 def main():
     print
@@ -14,7 +14,10 @@ def main():
             t.fileToText()
         response = input("Would you like to translate another file: " + "\n" + "y - yes, n - no: ")
         if (response == "y"):
+            print("")
             main()
+        else:
+            print("Program ended")
     else :
         print("Program ended")
 main()

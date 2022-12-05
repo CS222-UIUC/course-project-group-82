@@ -1,6 +1,6 @@
 from csv import reader
 from googletrans import Translator  
-from Source.Text_to_text import TxtToTxt
+from Source.Text_To_Text import TxtToTxt
 
 #Test 1 (Check if one letter word text is fine)
 def test_single_words():                              
@@ -48,10 +48,7 @@ def translateText(): # Checks text to file
 
     to_translate = "I am feeling very tired today. How are you doing? What are you up to? What a Surprise!"
     txtTranslator.translateText(to_translate, "fileTo.txt", "Spanish") #Text-To-File Test
-<<<<<<< HEAD
-    
     txtTranslator.translateFile("test.txt", "fileSecond.txt", "Spanish") #File-To-File Test
-=======
     to_translate = "bonjour"
     txtTranslator.translateText(to_translate, "fileTo2.txt", "English") #Text-To-File Test
     to_translate = "freiheit"
@@ -60,7 +57,6 @@ def translateText(): # Checks text to file
     txtTranslator.translateText(to_translate, "fileTo4.txt", "English") #Text-To-File Test
     txtTranslator.translateFile("test.txt", "fileSecond.txt", "Spanish") #File-To-File Test
     txtTranslator.translateFile("DeBelloGallico.txt", "TheGallicWar.text", "English")
->>>>>>> 7f8d4c20fc8eab428410660e772b4903e390d98a
 
 #test_single_words()
 #test_multiple_words()
