@@ -3,10 +3,12 @@ from fnmatch import translate
 import googletrans 
 from googletrans import Translator
 import Text_To_Text
-from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
+#from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
 import PyPDF2
 import os
 from os.path import exists
+from OneDriveUpload import OneDriveUpload
+
 class TxtToTxt:
     @staticmethod
     def translateText(toTranslate, fileTo, chosenLanguage):  #Here we have some text written in TextTest.py, and we want to take that text and translate it into a desired language and then output to file                                  
@@ -65,17 +67,7 @@ def inputToText():
     translated_text = translator.translate(text,src = translator.detect(text).lang, dest = language_to_trans)
     print("Here is your translated text: " + translated_text.text)
     print("")
-    input_upload = input("Do you want to save this file to OneDrive? y - Yes, n - No ")
-    print("")
-    if (input_upload == "y"):
-        print("You will be redirected to sign in to Microsoft OneDrive.\n" + 
-        "Type the generated code and follow the instructions.\n" + "This is a one-time procedure.\n" + 
-        "If you already signed in to OneDrive. Type y.\n")
-        response = input("Proceed?\n y - Yes, n - No: ")
-        print("")
-        if (response == "y"):
-            uploadToOneDrive("../OutputFiles/TranslatedText.txt")
-            print("Successfully uploaded file!")
+    OneDriveUpload("TranslatedText.txt")
 
 def fileToText():
     if (exists("../OutputFiles/TranslatedFile.txt")):
@@ -86,14 +78,5 @@ def fileToText():
     language_to_trans = input("Enter in the language that you want the text to be translated to: ")
     print("")
     t.translateFile(file_to_trans, "../OutputFiles/TranslatedFile.txt", language_to_trans) #why underlined, we defined translateFile in TextTest.py
-    input_upload = input("Do you want to save this file to OneDrive? y - Yes, n - No ")
     print("")
-    if (input_upload == "y"):
-        print("You will be redirected to sign in to Microsoft OneDrive.\n" + 
-        "Type the generated code and follow the instructions.\n" + "This is a one-time procedure.\n" + 
-        "If you already signed in to OneDrive. Type y.\n")
-        response = input("Proceed?\n y - Yes, n - No: ")
-        print("")
-        if (response == "y"):
-            uploadToOneDrive("../OutputFiles/TranslatedFile.txt")
-            print("Successfully uploaded file!")
+    OneDriveUpload("TranslatedFile.txt")

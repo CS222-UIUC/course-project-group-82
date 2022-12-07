@@ -8,7 +8,8 @@ import sys
 from time import sleep
 import textwrap 
 from os.path import exists
-from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
+#from OneDriveapi.Files_to_OneDrive import uploadToOneDrive
+from OneDriveUpload import OneDriveUpload
 
 
 def realtime():
@@ -48,6 +49,9 @@ def realtime():
     speech_recognizer.session_started.disconnect_all()
     speech_recognizer.recognized.disconnect_all()
     speech_recognizer.session_stopped.disconnect_all()
+
+    print("File was successfully converted!\n")
+    OneDriveUpload("TranslatedSpeech.txt")
  
 
 def from_file():
@@ -100,14 +104,4 @@ def from_file():
         time.sleep(.5)
 
     print("File was successfully converted!\n")
-    input_upload = input("Do you want to save this file to OneDrive? y - Yes, n - No ")
-    print("")
-    if (input_upload == "y"):
-        print("You will be redirected to sign in to Microsoft OneDrive.\n" + 
-        "Type the generated code and follow the instructions.\n" + "This is a one-time procedure.\n" + 
-        "If you already signed in to OneDrive. Type y.\n")
-        response = input("Proceed?\n y - Yes, n - No: ")
-        print("")
-        if (response == "y"):
-            uploadToOneDrive("../OutputFiles/TranslatedAudio.txt")
-            print("Successfully uploaded file!")
+    OneDriveUpload("TranslatedAudio.txt")
