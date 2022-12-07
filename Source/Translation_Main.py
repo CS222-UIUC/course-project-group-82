@@ -1,5 +1,5 @@
 import Speech_To_Text as s
-import Text_main as t
+import Text_To_Text as t
 def main():
     print
     mode = input("Please choose the type of file you want to translate: " + "\n" + "s - speech, a - audio, t - text file, i - input text, x - end program: ")
